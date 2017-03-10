@@ -17,9 +17,24 @@ node-red
 Go to http://127.0.0.1:1880/ and import this node flow :
 
 ```json
-{
-	<Exemple JSON format>
-}
+JSON exemple
+[  
+   {  
+      "id":"94f58d8e.57ce5",
+      "type":"http in",
+      "z":"e289053.92ef2f8",
+      "name":"",
+      "url":"",
+      "method":"get",
+      "x":185,
+      "y":260,
+      "wires":[  
+         [  
+
+         ]
+      ]
+   }
+]
 ```
 
 Ideas
