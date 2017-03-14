@@ -6,34 +6,48 @@ var router = express.Router();
 var request = require('request');
 var moment = require('moment');
 
+// Alarm var
+var time = "none";
+var isEnable = false;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone"});
+    if(isEnable)
+    {
+        res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm is set to : " + time});
+    }
+    else
+        res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone"});
 });
 
 /* POST set smartphone alarm time page. */
 router.post('/setAlarm', function (req, res, next) {
     //recup var du form time
     //format avec moment js
-    let timeStamp = req.body.time;
+    time = req.body.time;
 
     //include in post req below
-    request.post({url: 'http://127.0.0.1:1880/setAlarm', form: {key: timeStamp}}, function (err, httpResponse, body) {
+    request.post({url: 'http://127.0.0.1:1880/setAlarm', form: {key: time}}, function (err, httpResponse, body) {
         if (err)
-            console.log(err);
-        else
-            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm set successfully"});
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - an error occured, alarm unset"})
+        else {
+            isEnable = true;
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm set successfully to : " + time});
+        }
     });
 });
 
 /* POST set smartphone alarm time page. */
 router.post('/disableAlarm', function (req, res, next) {
-    request.post({url: 'http://127.0.0.1:1880/disableAlarm', form: {key: 'you'}}, function (err, httpResponse, body) {
+    //include in post req below
+    request.post({url: 'http://127.0.0.1:1880/disableAlarm', form: {key: "none"}}, function (err, httpResponse, body) {
         if (err)
-            console.log(err);
-        else
-            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm unset successfully"});
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - an error occured, alarm unset"})
+        else {
+            time = "none"
+            isEnable = false;
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm successfully unset"});
+        }
     });
 });
 
@@ -45,8 +59,22 @@ router.get('/setAlarm', function (req, res, next) {
 
 /* POST set smartphone alarm time page. */
 router.post('/snooze', function (req, res, next) {
-    //todo link to nodered
+    request.get({url: 'http://127.0.0.1:1880/isAuthorizedToSnooze', form: {key: "none"}}, function (err, httpResponse, body) {
+        if (err)
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - an error occured, alarm unset"})
+        else {
+            time = "none"
+            isEnable = false;
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm successfully unset"});
+        }
+    });
     res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
+});
+
+/* POST set smartphone alarm time page. */
+router.post('/doorisopen', function (req, res, next) {
+    //todo if alarm riinging -> shut
+    //res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
 });
 
 module.exports = router;

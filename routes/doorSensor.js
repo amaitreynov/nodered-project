@@ -3,8 +3,11 @@
  */
 var express = require('express');
 var router = express.Router();
-var time = "not";
+var request = require('request');
+
+var time = "none";
 var isEnable = false;
+var isAuthorizedToSnooze = true;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,11 +15,46 @@ router.get('/', function(req, res, next) {
     res.render('doorSensor', { title: 'Wake up IoT' , subTitle: "door sensor, time set -> " + time});
 });
 
+/* GET home page. */
+router.get('/isAuthorizedToSnooze', function(req, res, next) {
+    request.post({url: 'http://127.0.0.1:1880/doorisopen', form: {key: "none"}}, function (err, httpResponse, body) {
+        if (err)
+            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - an error occured"})
+        else {
+            time = "none"
+            isEnable = false;
+            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - door is open !!!"});
+        }
+    });
+    res.render('doorSensor', { title: 'Wake up IoT' , subTitle: "door sensor"});
+});
+
 /* POST set door sensor alarm time according to what's been posted via /smartphone/setAlarm page. */
 router.post('/setAlarm', function(req, res, next) {
         time = req.body.key;
 		isEnable = true;
 		res.redirect('/doorsensor/');
+});
+
+/* POST set door sensor alarm time according to what's been posted via /smartphone/setAlarm page. */
+router.post('/disableAlarm', function(req, res, next) {
+    time = "none";
+    isEnable = false;
+    res.redirect('/doorsensor/');
+});
+
+/* POST set door sensor alarm time according to what's been posted via /smartphone/setAlarm page. */
+router.post('/doorisopen', function(req, res, next) {
+
+    request.post({url: 'http://127.0.0.1:1880/doorisopen', form: {key: "none"}}, function (err, httpResponse, body) {
+        if (err)
+            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - an error occured"})
+        else {
+            time = "none"
+            isEnable = false;
+            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - door is open !!!"});
+        }
+    });
 });
 
 /* POST snooze. */

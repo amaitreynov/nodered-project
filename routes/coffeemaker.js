@@ -3,16 +3,26 @@
  */
 var express = require('express');
 var router = express.Router();
+var isReady = false;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log("on est dans l'index du door sensor");
-    res.render('coffeemaker', { title: 'Wake up IoT' , subTitle: "coffee maker"});
+    if(isReady)
+        res.render('coffeemaker', { title: 'Wake up IoT' , subTitle: "coffee maker - coffee is READY !! "});
+    else
+        res.render('coffeemaker', { title: 'Wake up IoT' , subTitle: "coffee maker is not ready"});
 });
 
 /* POST makeCoffee*/
 router.post('/makeCoffee', function(req, res, next) {
-		//todo link to nodered
+    isReady = true;
+    res.render('coffeemaker', { title: 'Wake up IoT' , subTitle: "coffee maker - coffee is READY !! "});
+});
+
+/* POST makeCoffee*/
+router.post('/drink', function(req, res, next) {
+    isReady = false;
+    res.render('coffeemaker', { title: 'Wake up IoT' , subTitle: "coffee maker is not ready"});
 });
 
 module.exports = router;
