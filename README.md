@@ -8,19 +8,19 @@ Architecture
 
 WorkFlow
 -------------
-#####Set Alarm
+- Set Alarm
 SmartPhone -> POST : setAlarm -> to NodeRed
 NodeRed      -> POST : setAlarm -> to doorSensor
 
-#####Disable Alarm
+- Disable Alarm
 SmarPhone -> POST : disableAlarm -> to NodeRed
 NodeRed -> POST : disableAlarm -> to doorSensor
 
-#####Shut Alarm down
+- Shut Alarm down
 SmartPhone -> POST : snooze -> if : GET : isAuthorizedToSnooze -> to NodeRed
 NodeRed -> GET : isAuthorizedToSnooze -> to doorSensor
 
-#####Door Is Open
+- Door Is Open
 DoorSensor -> POST : doorisopen -> to NodeRed
 NodeRed -> POST : makecoffee -> to coffeemaker
 NodeRed -> POST : doorisopen -> to SmartPhone (need shut alarm down)
