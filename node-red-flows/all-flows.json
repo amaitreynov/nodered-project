@@ -1,0 +1,337 @@
+[
+    {
+        "id": "e289053.92ef2f8",
+        "type": "tab",
+        "label": "SetAlarm"
+    },
+    {
+        "id": "7f07eaa4.cb49f4",
+        "type": "tab",
+        "label": "disableAlarm"
+    },
+    {
+        "id": "3b34181e.7cd058",
+        "type": "tab",
+        "label": "door is open"
+    },
+    {
+        "id": "b8d3d8ae.8fe0f8",
+        "type": "tab",
+        "label": "snooze"
+    },
+    {
+        "id": "c8c69494.ceea48",
+        "type": "tab",
+        "label": "Authorized to snooze GET"
+    },
+    {
+        "id": "414bb76.542ff48",
+        "type": "tab",
+        "label": "Authorized to snooze POST"
+    },
+    {
+        "id": "d50a4f23.116e7",
+        "type": "http in",
+        "z": "e289053.92ef2f8",
+        "name": "Setting alarm of door sensor with values from incoming smartphone values2",
+        "url": "/setAlarm",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 294,
+        "y": 41,
+        "wires": [
+            [
+                "48913025.5bb34",
+                "dc1b4a8a.ef5e68"
+            ]
+        ]
+    },
+    {
+        "id": "48913025.5bb34",
+        "type": "debug",
+        "z": "e289053.92ef2f8",
+        "name": "Alarm set",
+        "active": true,
+        "console": "true",
+        "complete": "payload",
+        "x": 705,
+        "y": 31,
+        "wires": []
+    },
+    {
+        "id": "6b2d3960.09c2f8",
+        "type": "http response",
+        "z": "e289053.92ef2f8",
+        "name": "Door sensor alarm has been succesfully set",
+        "x": 378,
+        "y": 259,
+        "wires": []
+    },
+    {
+        "id": "dc1b4a8a.ef5e68",
+        "type": "http request",
+        "z": "e289053.92ef2f8",
+        "name": "POST req to set door sensor alarm time via API",
+        "method": "POST",
+        "ret": "txt",
+        "url": "127.0.0.1:3000/doorsensor/setAlarm",
+        "tls": "",
+        "x": 279,
+        "y": 162,
+        "wires": [
+            [
+                "6b2d3960.09c2f8",
+                "dabbe90a.e13998"
+            ]
+        ]
+    },
+    {
+        "id": "dabbe90a.e13998",
+        "type": "debug",
+        "z": "e289053.92ef2f8",
+        "name": "Alarm set @post doorsensor",
+        "active": true,
+        "console": "true",
+        "complete": "payload",
+        "x": 686,
+        "y": 156,
+        "wires": []
+    },
+    {
+        "id": "32a52b62.134b74",
+        "type": "http in",
+        "z": "7f07eaa4.cb49f4",
+        "name": "disable the alarm",
+        "url": "/disableAlarm",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 149,
+        "y": 74,
+        "wires": [
+            [
+                "bddba910.9cd958"
+            ]
+        ]
+    },
+    {
+        "id": "bddba910.9cd958",
+        "type": "http request",
+        "z": "7f07eaa4.cb49f4",
+        "name": "disable the sensor",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://localhost:3000/doorsensor/disableAlarm",
+        "tls": "",
+        "x": 386,
+        "y": 160,
+        "wires": [
+            [
+                "a2e17813.616408"
+            ]
+        ]
+    },
+    {
+        "id": "a2e17813.616408",
+        "type": "http response",
+        "z": "7f07eaa4.cb49f4",
+        "name": "response",
+        "x": 670,
+        "y": 122,
+        "wires": []
+    },
+    {
+        "id": "d6045dae.d99db",
+        "type": "http in",
+        "z": "3b34181e.7cd058",
+        "name": "Door is open : Make coffee and shut alarm",
+        "url": "/doorisopen",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 165,
+        "y": 69,
+        "wires": [
+            [
+                "38eec0ca.7b425",
+                "dc9abbc1.49e3a8"
+            ]
+        ]
+    },
+    {
+        "id": "1e6b0bd3.f44b74",
+        "type": "http response",
+        "z": "3b34181e.7cd058",
+        "name": "response ok",
+        "x": 736,
+        "y": 56,
+        "wires": []
+    },
+    {
+        "id": "38eec0ca.7b425",
+        "type": "http request",
+        "z": "3b34181e.7cd058",
+        "name": "make a coffee",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://localhost:3000/coffeemaker/makeCoffee",
+        "tls": "",
+        "x": 487,
+        "y": 50,
+        "wires": [
+            [
+                "1e6b0bd3.f44b74"
+            ]
+        ]
+    },
+    {
+        "id": "dc9abbc1.49e3a8",
+        "type": "http request",
+        "z": "3b34181e.7cd058",
+        "name": "Door is open, shut alarm",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://localhost:3000/smartphone/doorisopen",
+        "tls": "",
+        "x": 533,
+        "y": 172,
+        "wires": [
+            [
+                "4758ec2b.e913e4"
+            ]
+        ]
+    },
+    {
+        "id": "4758ec2b.e913e4",
+        "type": "http response",
+        "z": "3b34181e.7cd058",
+        "name": "",
+        "x": 748,
+        "y": 173,
+        "wires": []
+    },
+    {
+        "id": "f5889e83.6f0a7",
+        "type": "http in",
+        "z": "b8d3d8ae.8fe0f8",
+        "name": "Snooze event",
+        "url": "/snooze",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 121,
+        "y": 81,
+        "wires": [
+            [
+                "15fc216b.dc127f"
+            ]
+        ]
+    },
+    {
+        "id": "15fc216b.dc127f",
+        "type": "http request",
+        "z": "b8d3d8ae.8fe0f8",
+        "name": "Snooze event to door sensor",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://localhost:3000/doorSensor/snooze",
+        "tls": "",
+        "x": 413,
+        "y": 90,
+        "wires": [
+            [
+                "d1a8fc98.0bb85"
+            ]
+        ]
+    },
+    {
+        "id": "d1a8fc98.0bb85",
+        "type": "http response",
+        "z": "b8d3d8ae.8fe0f8",
+        "name": "response OK",
+        "x": 677,
+        "y": 89,
+        "wires": []
+    },
+    {
+        "id": "4aff9e45.56c97",
+        "type": "http in",
+        "z": "c8c69494.ceea48",
+        "name": "Is authorized to snooze",
+        "url": "/isAuthorizedToSnooze",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 155,
+        "y": 98,
+        "wires": [
+            [
+                "dd7a302f.2abec"
+            ]
+        ]
+    },
+    {
+        "id": "dd7a302f.2abec",
+        "type": "http request",
+        "z": "c8c69494.ceea48",
+        "name": "Is authorized to snooze event ",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://localhost:3000/doorSensor/isAuthorizedToSnooze",
+        "tls": "",
+        "x": 528,
+        "y": 94,
+        "wires": [
+            [
+                "5fa53e99.5212f"
+            ]
+        ]
+    },
+    {
+        "id": "5fa53e99.5212f",
+        "type": "http response",
+        "z": "c8c69494.ceea48",
+        "name": "reponse",
+        "x": 769,
+        "y": 93,
+        "wires": []
+    },
+    {
+        "id": "1a1c95d3.ef4a1a",
+        "type": "http response",
+        "z": "414bb76.542ff48",
+        "name": "response",
+        "x": 801,
+        "y": 71,
+        "wires": []
+    },
+    {
+        "id": "af2f2aa5.28a708",
+        "type": "http in",
+        "z": "414bb76.542ff48",
+        "name": "Call smartphone to put isAuthorizedToSnooze",
+        "url": "/isAuthorizedToSnooze",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 299,
+        "y": 91,
+        "wires": [
+            [
+                "522a3dff.b4d3e4"
+            ]
+        ]
+    },
+    {
+        "id": "522a3dff.b4d3e4",
+        "type": "http request",
+        "z": "414bb76.542ff48",
+        "name": "Snooze response",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://localhost:3000/smartphone/isAuthorizedToSnooze",
+        "tls": "",
+        "x": 620,
+        "y": 80,
+        "wires": [
+            [
+                "1a1c95d3.ef4a1a"
+            ]
+        ]
+    }
+]
