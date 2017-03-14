@@ -25,11 +25,6 @@
         "label": "Authorized to snooze GET"
     },
     {
-        "id": "414bb76.542ff48",
-        "type": "tab",
-        "label": "Authorized to snooze POST"
-    },
-    {
         "id": "d50a4f23.116e7",
         "type": "http in",
         "z": "e289053.92ef2f8",
@@ -187,7 +182,7 @@
         "type": "http request",
         "z": "3b34181e.7cd058",
         "name": "Door is open, shut alarm",
-        "method": "GET",
+        "method": "POST",
         "ret": "txt",
         "url": "http://localhost:3000/smartphone/doorisopen",
         "tls": "",
@@ -291,47 +286,5 @@
         "x": 769,
         "y": 93,
         "wires": []
-    },
-    {
-        "id": "1a1c95d3.ef4a1a",
-        "type": "http response",
-        "z": "414bb76.542ff48",
-        "name": "response",
-        "x": 801,
-        "y": 71,
-        "wires": []
-    },
-    {
-        "id": "af2f2aa5.28a708",
-        "type": "http in",
-        "z": "414bb76.542ff48",
-        "name": "Call smartphone to put isAuthorizedToSnooze",
-        "url": "/isAuthorizedToSnooze",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 299,
-        "y": 91,
-        "wires": [
-            [
-                "522a3dff.b4d3e4"
-            ]
-        ]
-    },
-    {
-        "id": "522a3dff.b4d3e4",
-        "type": "http request",
-        "z": "414bb76.542ff48",
-        "name": "Snooze response",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://localhost:3000/smartphone/isAuthorizedToSnooze",
-        "tls": "",
-        "x": 620,
-        "y": 80,
-        "wires": [
-            [
-                "1a1c95d3.ef4a1a"
-            ]
-        ]
     }
 ]
