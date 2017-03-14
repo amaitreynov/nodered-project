@@ -7,7 +7,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	console.log("on est dans l'index du door sensor");
-    res.render('index', { title: 'Wake up IoT' , subTitle: "Home door sensor"});
+    res.render('doorSensor', { title: 'Wake up IoT' , subTitle: "door sensor"});
 });
 
 /* POST set door sensor alarm time according to what's been posted via /smartphone/setAlarm page. */

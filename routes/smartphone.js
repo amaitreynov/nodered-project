@@ -8,7 +8,7 @@ var request = require('request');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Wake up IoT', subTitle: "Home"});
+    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone"});
 });
 
 /* POST set smartphone alarm time page. */
@@ -16,11 +16,8 @@ router.post('/setAlarm', function (req, res, next) {
     request.post({url:'http://127.0.0.1:1880/setAlarm', form: {key:'value'}}, function(err,httpResponse,body){
         if(err)
             console.log(err);
-        else {
-            // console.log(httpResponse);
-            // console.log(JSON.stringify(body));
+        else
             res.render('smartphone', { title: 'Wake up IoT' , subTitle: "Smartphone - Alarm Set successfully"});
-        }
     });
 });
 
