@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var moment = require('moment');
 
 
 /* GET home page. */
@@ -13,11 +14,26 @@ router.get('/', function (req, res, next) {
 
 /* POST set smartphone alarm time page. */
 router.post('/setAlarm', function (req, res, next) {
-    request.post({url:'http://127.0.0.1:1880/setAlarm', form: {key:'value'}}, function(err,httpResponse,body){
-        if(err)
+    //recup var du form time
+    //format avec moment js
+    let timeStamp = req.body.time;
+
+    //include in post req below
+    request.post({url: 'http://127.0.0.1:1880/setAlarm', form: {key: timeStamp}}, function (err, httpResponse, body) {
+        if (err)
             console.log(err);
         else
-            res.render('smartphone', { title: 'Wake up IoT' , subTitle: "Smartphone - Alarm Set successfully"});
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm set successfully"});
+    });
+});
+
+/* POST set smartphone alarm time page. */
+router.post('/disableAlarm', function (req, res, next) {
+    request.post({url: 'http://127.0.0.1:1880/disableAlarm', form: {key: 'you'}}, function (err, httpResponse, body) {
+        if (err)
+            console.log(err);
+        else
+            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm unset successfully"});
     });
 });
 
