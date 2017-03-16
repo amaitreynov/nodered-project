@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var moment = require('moment');
+var _ = require('lodash');
 
 // Alarm var
 var time = "none";
@@ -21,13 +22,14 @@ router.get('/', function (req, res, next) {
 
 /* POST set smartphone alarm time page. */
 router.post('/setAlarm', function (req, res, next) {
-    //recup var du form time
-    time = req.body.time;
 
+    if(_.isEmpty(req.body.time) || _.isNil(req.body.time))
+        return res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Time is empty or invalid"});
+
+    //recup var du form time
     //format avec moment js
-    //todo try / catch si jamais bad value
-    //todo check if time is empty, cut req
-    let formattedTime = moment(time);
+    let time = moment(req.body.time).format();
+    let formattedTime = moment(req.body.time).format("dddd, MMMM Do YYYY, h:mm a");
 
     //include in post req below
     request.post({
@@ -40,7 +42,7 @@ router.post('/setAlarm', function (req, res, next) {
             isEnable = true;
             res.render('smartphone', {
                 title: 'Wake up IoT',
-                subTitle: "Smartphone - Alarm set successfully to : " + time
+                subTitle: "Smartphone - Alarm set successfully to : " + formattedTime
             });
         }
     });
