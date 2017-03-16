@@ -1,4 +1,4 @@
-Welcome to "wake up" app!
+Welcome to "Wake Me Up !" app!
 ===================
 
 Architecture
@@ -37,18 +37,19 @@ Go to http://127.0.0.1:1880/ and import all-flows.json (in node-red-flows direct
 
 Future features
 ----------
-- <i></i> Ring alarm
-- <i></i> Choose alarm
+- <i></i> Make alarm ring with a cron (which will trigger alarm and make it ring on phone - or device)
+- <i></i> Choose and upload personal alarm
 
 Ideas
 ----------
-
 - <i></i>A web App to simulate the three devices (Smartphone, door sensor and coffee maker)
 	- <i></i> A div for each devices
-- <i></i>Functions required :
+- <i></i>Functions implemented :
 	- <i></i> Set alarm
-	- <i></i> Snooze alarm
+	- <i></i> Disable alarm
+	- <i></i> Snooze alarm (simulated)
 	- <i></i> User can snooze ?
 	- <i></i> Door is open !
 	- <i></i> Make coffee :)
 
+    - <i></i> Bonus: ring alarm @ /smartphone/ring
