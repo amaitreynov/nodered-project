@@ -15,19 +15,9 @@
         "label": "door is open"
     },
     {
-        "id": "b8d3d8ae.8fe0f8",
-        "type": "tab",
-        "label": "snooze"
-    },
-    {
         "id": "c8c69494.ceea48",
         "type": "tab",
-        "label": "Authorized to snooze GET"
-    },
-    {
-        "id": "5475c4cb.a76d5c",
-        "type": "tab",
-        "label": "notSnooze"
+        "label": "Authorized to snooze"
     },
     {
         "id": "d50a4f23.116e7",
@@ -209,48 +199,6 @@
         "wires": []
     },
     {
-        "id": "f5889e83.6f0a7",
-        "type": "http in",
-        "z": "b8d3d8ae.8fe0f8",
-        "name": "Snooze event",
-        "url": "/snooze",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 121,
-        "y": 81,
-        "wires": [
-            [
-                "15fc216b.dc127f"
-            ]
-        ]
-    },
-    {
-        "id": "15fc216b.dc127f",
-        "type": "http request",
-        "z": "b8d3d8ae.8fe0f8",
-        "name": "Snooze event to door sensor",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://localhost:3000/smartphone/snooze",
-        "tls": "",
-        "x": 413,
-        "y": 90,
-        "wires": [
-            [
-                "d1a8fc98.0bb85"
-            ]
-        ]
-    },
-    {
-        "id": "d1a8fc98.0bb85",
-        "type": "http response",
-        "z": "b8d3d8ae.8fe0f8",
-        "name": "response OK",
-        "x": 677,
-        "y": 89,
-        "wires": []
-    },
-    {
         "id": "4aff9e45.56c97",
         "type": "http in",
         "z": "c8c69494.ceea48",
@@ -291,47 +239,5 @@
         "x": 769,
         "y": 93,
         "wires": []
-    },
-    {
-        "id": "33ee140d.12578c",
-        "type": "http in",
-        "z": "5475c4cb.a76d5c",
-        "name": "Not authorized to snooze",
-        "url": "/notSnooze",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 155,
-        "y": 122,
-        "wires": [
-            [
-                "591c5601.290ce8"
-            ]
-        ]
-    },
-    {
-        "id": "22663115.500c4e",
-        "type": "http response",
-        "z": "5475c4cb.a76d5c",
-        "name": "response",
-        "x": 732,
-        "y": 127,
-        "wires": []
-    },
-    {
-        "id": "591c5601.290ce8",
-        "type": "http request",
-        "z": "5475c4cb.a76d5c",
-        "name": "Tel to smartphone to not snooze",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://localhost:3000/smartphone/notSnooze",
-        "tls": "",
-        "x": 482,
-        "y": 128,
-        "wires": [
-            [
-                "22663115.500c4e"
-            ]
-        ]
     }
 ]

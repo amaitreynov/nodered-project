@@ -35,6 +35,11 @@ node-red
 
 Go to http://127.0.0.1:1880/ and import all-flows.json (in node-red-flows directory) content.
 
+Future features
+----------
+- <i></i> Ring alarm
+- <i></i> Choose alarm
+
 Ideas
 ----------
 
