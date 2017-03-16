@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -135,5 +137,6 @@ function onListening() {
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
+    console.log("Server started and listening on " + bind);
 }
 module.exports = app;
