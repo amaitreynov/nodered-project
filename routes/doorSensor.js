@@ -62,11 +62,4 @@ router.get('/isAuthorizedToSnooze', function (req, res, next) {
     // });
 });
 
-
-/* POST snooze. */
-router.post('/snooze', function (req, res, next) {
-    //todo link to nodered
-    res.render('index', {title: 'Wake up IoT', subTitle: "Door sensor - Snooze"});
-});
-
 module.exports = router;
