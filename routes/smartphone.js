@@ -87,8 +87,6 @@ router.post('/snooze', function (req, res, next) {
 router.post('/doorisopen', function (req, res, next) {
     //todo if alarm riinging -> shut
     //res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
-		//todo if alarm riinging -> TEPU
-		//res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
 });
 
 module.exports = router;

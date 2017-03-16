@@ -16,8 +16,6 @@ router.get('/', function (req, res, next) {
 });
 
 /* GET home page. */
-router.get('/isAuthorizedToSnooze', function(req, res, next) {
-    //todo
 router.get('/isAuthorizedToSnooze', function (req, res, next) {
     //todo
 });
