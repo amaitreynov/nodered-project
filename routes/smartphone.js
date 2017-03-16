@@ -9,12 +9,16 @@ var moment = require('moment');
 // Alarm var
 var time = "none";
 var isEnable = false;
+var isRinging = true;
+var isSnoozed = false;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
     if (isEnable) {
         res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm is set to : " + time});
     }
+    else if(isSnoozed)
+        res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm is snoozed"});
     else
         res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone"});
 });
@@ -68,19 +72,25 @@ router.get('/setAlarm', function (req, res, next) {
 
 /* POST set smartphone alarm time page. */
 router.post('/snooze', function (req, res, next) {
-    request.get({
-        url: 'http://127.0.0.1:1880/isAuthorizedToSnooze',
-        form: {key: "none"}
-    }, function (err, httpResponse, body) {
-        if (err)
-            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - an error occured, alarm unset"});
-        else {
-            time = "none";
-            isEnable = false;
-            res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm successfully unset"});
-        }
-    });
-    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
+	if(isRinging)
+		// Check if is authozired to snooze
+		request.get({
+			url: 'http://127.0.0.1:1880/isAuthorizedToSnooze',
+			form: {key: "none"}
+		}, function (err, httpResponse, body) {
+			if (err)
+				console.log(err);
+			else
+			{
+				if(body === "true")
+                    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm is snoozed"});
+				else
+                    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm can not be snoozed"});
+			}
+
+		});
+	else
+    	res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Alarm is not ringing"});
 });
 
 /* POST set smartphone alarm time page. */
