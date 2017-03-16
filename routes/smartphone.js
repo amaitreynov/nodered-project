@@ -82,7 +82,7 @@ router.post('/snooze', function (req, res, next) {
 
 /* POST set smartphone alarm time page. */
 router.post('/doorisopen', function (req, res, next) {
-		//todo if alarm riinging -> shut
+		//todo if alarm riinging -> TEPU
 		//res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
 });
 

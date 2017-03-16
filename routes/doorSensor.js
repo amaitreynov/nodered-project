@@ -17,16 +17,7 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/isAuthorizedToSnooze', function(req, res, next) {
-    request.post({url: 'http://127.0.0.1:1880/doorisopen', form: {key: "none"}}, function (err, httpResponse, body) {
-        if (err)
-            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - an error occured"})
-        else {
-            time = "none"
-            isEnable = false;
-            res.render('doorsensor', {title: 'Wake up IoT', subTitle: "DoorSensor - door is open !!!"});
-        }
-    });
-    res.render('doorSensor', { title: 'Wake up IoT' , subTitle: "door sensor"});
+    //todo
 });
 
 /* POST set door sensor alarm time according to what's been posted via /smartphone/setAlarm page. */
