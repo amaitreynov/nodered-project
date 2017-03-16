@@ -6,6 +6,7 @@ var router = express.Router();
 var request = require('request');
 var moment = require('moment');
 var _ = require('lodash');
+var path = require("path");
 
 // Alarm var
 var time = "none";
@@ -23,7 +24,7 @@ router.get('/', function (req, res, next) {
 /* POST set smartphone alarm time page. */
 router.post('/setAlarm', function (req, res, next) {
 
-    if(_.isEmpty(req.body.time) || _.isNil(req.body.time))
+    if (_.isEmpty(req.body.time) || _.isNil(req.body.time))
         return res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Time is empty or invalid"});
 
     //recup var du form time
@@ -84,6 +85,26 @@ router.post('/snooze', function (req, res, next) {
     });
     res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Snooze"});
 });
+
+/* GET ring alarm. */
+//todo use socket or such thing to handle live ringing and snoozing
+router.get('/ring', function (req, res, next) {
+    //todo play audio sound
+    let fileToPlay = path.resolve(__dirname + '/../public/sound/Annoying_Alarm_Clock-UncleKornicob-420925725.mp3');
+
+    var fs = require('fs');
+    var lame = require('lame');
+    var Speaker = require('speaker');
+
+    fs.createReadStream(fileToPlay)
+        .pipe(new lame.Decoder())
+        .on('format', function (format) {
+            this.pipe(new Speaker(format));
+        });
+
+    res.render('smartphone', {title: 'Wake up IoT', subTitle: "Smartphone - Ring playing"});
+});
+
 
 /* POST set smartphone alarm time page. */
 router.post('/doorisopen', function (req, res, next) {
