@@ -27,7 +27,7 @@ WorkFlow
 
 Prerequisites
 -------------
-Need to install and run Node-Red on yout project
+Need to install and run Node-Red on your project
 ```
 npm install -g node-red
 node-red
@@ -38,9 +38,9 @@ Go to http://127.0.0.1:1880/ and import all-flows.json (in node-red-flows direct
 Ideas
 ----------
 
-- <i></i>A web App for simulate the three devices (Smartphone, door sensor and coffee maker)
+- <i></i>A web App to simulate the three devices (Smartphone, door sensor and coffee maker)
 	- <i></i> A div for each devices
-- <i></i>Funtions required :
+- <i></i>Functions required :
 	- <i></i> Set alarm
 	- <i></i> Snooze alarm
 	- <i></i> User can snooze ?
